@@ -19,7 +19,8 @@ final class MoverController {
     private static final int FORWARD_TELEPORTS_PER_CYCLE = 305;
     private static final int CYCLES = 305;
     private static final double BLOCKS_PER_FORWARD_TELEPORT = 20.0D;
-    private static final double BLOCKS_PER_CYCLE = 6100.0D;
+    private static final double BLOCKS_PER_RETURN_TELEPORT_X = -6100.0D;
+    private static final double BLOCKS_PER_RETURN_TELEPORT_Z = 160.0D;
 
     private final Map<UUID, MovementTask> tasks = new HashMap<>();
 
@@ -65,7 +66,7 @@ final class MoverController {
             }
             task.ticksUntilMove = TICKS_BETWEEN_MOVES;
 
-            if (!teleportRelativeX(player, BLOCKS_PER_FORWARD_TELEPORT)) {
+            if (!teleportRelative(player, BLOCKS_PER_FORWARD_TELEPORT, 0.0D)) {
                 player.sendMessage(Text.literal("Mover stopped because a teleport failed."), false);
                 iterator.remove();
                 continue;
@@ -76,8 +77,7 @@ final class MoverController {
                 continue;
             }
 
-            // This is the equivalent of /tp ~-6100 ~ ~ immediately after the 305th forward move.
-            if (!teleportRelativeX(player, -BLOCKS_PER_CYCLE)) {
+            if (!teleportRelative(player, BLOCKS_PER_RETURN_TELEPORT_X, BLOCKS_PER_RETURN_TELEPORT_Z)) {
                 player.sendMessage(Text.literal("Mover stopped because the return teleport failed."), false);
                 iterator.remove();
                 continue;
@@ -92,13 +92,13 @@ final class MoverController {
         }
     }
 
-    private static boolean teleportRelativeX(ServerPlayerEntity player, double offsetX) {
+    private static boolean teleportRelative(ServerPlayerEntity player, double offsetX, double offsetZ) {
         ServerWorld world = player.getEntityWorld();
         return player.teleport(
                 world,
                 player.getX() + offsetX,
                 player.getY(),
-                player.getZ(),
+                player.getZ() + offsetZ,
                 Set.<PositionFlag>of(),
                 player.getYaw(),
                 player.getPitch(),
