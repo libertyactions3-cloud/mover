@@ -93,7 +93,7 @@ final class MoverController {
     }
 
     private static boolean teleportRelativeX(ServerPlayerEntity player, double offsetX) {
-        ServerWorld world = (ServerWorld) player.getWorld();
+        ServerWorld world = player.getEntityWorld();
         return player.teleport(
                 world,
                 player.getX() + offsetX,
