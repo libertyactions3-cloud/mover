@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "mover",
+  "version": "${version}",
+  "name": "Mover",
+  "description": "A server-side command that moves players on a repeated teleport cycle.",
+  "authors": [
+    "libertyactions3-cloud"
+  ],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "pumpkin2enchantmc.net.mover.MoverModInitializer"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-command-api-v2": ">=0.141.4",
+    "fabric-lifecycle-events-v1": ">=0.141.4",
+    "fabric-events-interaction-v0": ">=0.141.4"
+  }
+}
