@@ -1,6 +1,6 @@
 # Mover
 
-Server-side Fabric mod for Minecraft 1.21.11, configured with the same Gradle, Loom, mappings, loader, and Fabric API versions as BarrelLoot.
+Server-side Fabric mod for Minecraft 1.21.11.
 
 ## Commands
 
